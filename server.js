@@ -45,7 +45,9 @@ app.use(bodyParser({defer: true}));
         });
           res.end();
     });
+
 });
-var server = app.listen(3030, function() {
+var port = process.env.PORT || 1337;
+var server = app.listen(port, function() {
 console.log('Listening on port %d', server.address().port);
 });

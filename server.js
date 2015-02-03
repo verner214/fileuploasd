@@ -5,6 +5,12 @@ var path = require('path');     //used for file path
 var fs =require('fs-extra');    //File System-needed for renaming file etc
 
 var app = express();
+
+//var imgdir = './img';
+
+//if (!fs.existsSync(imgdir)){
+//    fs.mkdirSync(imgdir);
+//}
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ========================================================== 
@@ -16,7 +22,7 @@ app.use(bodyParser({defer: true}));
 
   var form = new formidable.IncomingForm();
     //Formidable uploads to operating systems tmp dir by default
-    form.uploadDir = "./img";       //set upload directory
+    form.uploadDir = "";       //set upload directory
     form.keepExtensions = true;     //keep file extension
 
     form.parse(req, function(err, fields, files) {
@@ -32,7 +38,7 @@ app.use(bodyParser({defer: true}));
 
         //Formidable changes the name of the uploaded file
         //Rename the file to its original name
-        fs.rename(files.fileUploaded.path, './img/'+files.fileUploaded.name, function(err) {
+        fs.rename(files.fileUploaded.path, files.fileUploaded.name, function(err) {
         if (err)
             throw err;
           console.log('renamed complete');  
